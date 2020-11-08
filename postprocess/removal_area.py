@@ -228,8 +228,8 @@ def main():
     指定した条件のラベルを除去する
     :return:
     """
-    input_dir = '/mnt/d_drive/home/ashida/work/Tellus_v2/runs/Sep18_16-27-08_ashidaLR_0.0001_BS_1_SCALE_0.5/ver0.3/'
-    output_dir = '/mnt/d_drive/home/ashida/work/Tellus_v2/output/'
+    input_dir = '/mnt/d_drive/home/ashida/work/Tellus_v4/postprocess/ensemble_v2/output/'
+    output_dir = '/mnt/d_drive/home/ashida/work/Tellus_v4/postprocess/ensemble_v2/output_line/'
     file_list = glob.glob(input_dir + '*.png')
 
     for file_name in file_list:
@@ -237,7 +237,7 @@ def main():
         img = cv.imread(file_name, flags=-1)
         h = img.shape[0]
         w = img.shape[1]
-        img = cv.resize(img, (512, 512))
+        # img = cv.resize(img, (512, 512))
         resize_h = img.shape[0]
         resize_w = img.shape[1]
 
@@ -246,6 +246,7 @@ def main():
         # 膨張収縮処理
         kernel = np.ones((13, 13), np.uint8)
         img = cv.dilate(img, kernel)  # 膨張処理
+
         # img = cv.erode(img, kernel, 2)  # 収縮処理
         # resize_show('orig_img', orig_img, 1)
         # resize_show('img', img, 1)
@@ -263,7 +264,7 @@ def main():
         for i in range(1, n_labels):
             label_w = stats[i, 2]
             label_h = stats[i, 3]
-            if label_w > int(resize_w/10) or label_h > int(resize_h/10):  # 除去するラベルの条件式
+            if label_w > int(resize_w/100) or label_h > int(resize_h/100):  # 除去するラベルの条件式
                 idx.append(i)
 
         removal_img = np.zeros((resize_h, resize_w))
@@ -271,7 +272,7 @@ def main():
             removal_img[labels == i] = 255
 
         kernel_2 = np.ones((5, 5), np.uint8)
-        removal_img = cv.erode(removal_img, kernel_2)  # 収縮処理
+        # removal_img = cv.erode(removal_img, kernel_2)  # 収縮処理
 
         # cv.imshow('orig_img', orig_img)
         # cv.imshow('removal_img', removal_img)

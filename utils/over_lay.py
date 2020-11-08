@@ -11,9 +11,9 @@ def main():
     (2値化後の画像で上書きする)
     :return:
     """
-    input_ori_dir = '/mnt/d_drive/home/ashida/work/Tellus_v2/input/test_images_png/'
-    input_bin_dir = '/mnt/d_drive/home/ashida/work/Tellus_v2/runs/Sep18_16-27-08_ashidaLR_0.0001_BS_1_SCALE_0.5/ver0.6/'
-    output_dir = '/mnt/d_drive/home/ashida/work/Tellus_v2/runs/Sep18_16-27-08_ashidaLR_0.0001_BS_1_SCALE_0.5/ver0.6//over_lay/'
+    input_ori_dir = '/mnt/d_drive/home/ashida/work/Tellus_v3/input/train_images_png/'
+    input_bin_dir = '/mnt/d_drive/home/ashida/work/Tellus_v3/input/train_images_png_kouten_ignore_blank/'
+    output_dir = '/mnt/d_drive/home/ashida/work/Tellus_v3/input/train_images_png_kouten_ignore_blank/overlay/'
 
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
